@@ -1,14 +1,13 @@
 // src/components/IframePlayer.tsx
-
 'use client';
 
 import { useState, useEffect } from 'react';
 
-interface IframePlayerProps {
+type Props = {
   embedUrl: string;
-}
+};
 
-export default function IframePlayer({ embedUrl }: IframePlayerProps) {
+export default function IframePlayer({ embedUrl }: Props) {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -17,20 +16,23 @@ export default function IframePlayer({ embedUrl }: IframePlayerProps) {
 
   if (!isMounted) {
     return (
-      <div className="aspect-video bg-gray-800 rounded-lg flex items-center justify-center">
-        <p className="text-gray-400">Loading Player...</p>
+      <div className="aspect-video bg-gray-800 rounded-lg flex items-center justify-center mt-12">
+        <p className="text-gray-400">Loading Livestream Player…</p>
       </div>
     );
   }
 
   return (
-    <div className="aspect-video relative">
-      <iframe
-        src={embedUrl}
-        className="absolute top-0 left-0 w-full h-full rounded-lg"
-        allowFullScreen
-        allow="autoplay; encrypted-media; picture-in-picture; camera; microphone"
-      />
+    <div className="mt-12">
+      <h2 className="text-3xl font-bold mb-4">Livestream</h2>
+      <div className="aspect-video relative">
+        <iframe
+          src={embedUrl}
+          allowFullScreen
+          allow="autoplay; encrypted-media; picture-in-picture; camera; microphone"
+          className="absolute top-0 left-0 w-full h-full rounded-lg"
+        ></iframe>
+      </div>
     </div>
   );
 }

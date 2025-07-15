@@ -1,22 +1,16 @@
-// src/app/layout.tsx - FINAL, BEST VERSION
+// src/app/layout.tsx
+import './globals.css';
+import type { ReactNode } from 'react';
 
-import type { Metadata } from 'next'
-import { Geist } from 'next/font/google'
-import './globals.css'
-
-const geist = Geist({ subsets: ['latin'] })
-
-export const metadata: Metadata = {
+export const metadata = {
   title: 'Philosopher Debates',
-  description: 'Live philosophical debates between the greatest minds.',
-}
-
-import { ReactNode } from 'react';
+  description: 'Live debate platform',
+};
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body className={geist.className}>{children}</body>
+      <body className="bg-black text-white">{children}</body>
     </html>
   );
 }

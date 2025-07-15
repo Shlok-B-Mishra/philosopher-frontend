@@ -1,31 +1,33 @@
 'use client';
-import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
 
-type Debate = { id: number; title: string; };
+type Debate = {
+  id: number;
+  title: string;
+};
 
-export default function Home() {
+export default function HomePage() {
   const [debates, setDebates] = useState<Debate[]>([]);
+
   useEffect(() => {
     fetch('http://127.0.0.1:8000/api/v1/debates/')
-      .then(res => res.ok ? res.json() : Promise.reject('Failed to fetch debates'))
+      .then(res => res.ok ? res.json() : Promise.reject('API Error'))
       .then(setDebates)
       .catch(console.error);
   }, []);
 
   return (
-    <main className="bg-black text-white min-h-screen">
-      <div className="container mx-auto p-8">
-        <h1 className="text-4xl font-bold text-center mb-12">Philosopher Debates</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {debates.map(debate => (
-            <Link key={debate.id} href={`/debates/${debate.id}`} className="block">
-              <div className="border border-gray-700 p-6 rounded-lg hover:border-yellow-400">
-                <h2 className="text-2xl font-semibold">{debate.title}</h2>
-              </div>
-            </Link>
-          ))}
-        </div>
+    <main className="min-h-screen p-8">
+      <h1 className="text-4xl font-bold mb-12 text-center">Philosopher Debates</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {debates.map(debate => (
+          <Link key={debate.id} href={`/debates/${debate.id}`} className="block">
+            <div className="border border-gray-700 p-4 rounded-lg hover:border-yellow-400">
+              <h2 className="text-xl">{debate.title}</h2>
+            </div>
+          </Link>
+        ))}
       </div>
     </main>
   );
